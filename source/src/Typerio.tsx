@@ -15,12 +15,19 @@ type TyperioProps = {
   input: TyperioInput[];
 };
 
-const Typerio: React.FC<TyperioProps> = ({ input }) => {
-  const { text, style, element } = input[0];
-
-  const Element = React.createElement(element, { className: style }, text);
-
-  return Element;
-};
+const Typerio: React.FC<TyperioProps> = ({ input }) => (
+  <>
+    {input.map((item, index) =>
+      React.createElement(
+        item.element,
+        {
+          key: index,
+          className: item.style,
+        },
+        item.text
+      )
+    )}
+  </>
+);
 
 export default Typerio;
