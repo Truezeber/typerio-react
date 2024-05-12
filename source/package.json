@@ -1,0 +1,24 @@
+{
+  "name": "typerio-react",
+  "version": "1.0.0",
+  "description": "React port of Typerio - lightweight  package for creating typewriter effect.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pasiastazebra/typerio-react"
+  },
+  "keywords": [
+    "typewriting",
+    "typing",
+    "terminal",
+    "effect",
+    "word",
+    "sentences",
+    "words"
+  ],
+  "author": "Zeber",
+  "license": "ISC"
+}
