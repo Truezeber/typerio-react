@@ -2,9 +2,18 @@
   "name": "typerio-react",
   "version": "1.0.0",
   "description": "React port of Typerio - lightweight  package for creating typewriter effect.",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,5 +29,15 @@
     "words"
   ],
   "author": "Zeber",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pasiastazebra/typerio-react/issues"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.2",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
 }
