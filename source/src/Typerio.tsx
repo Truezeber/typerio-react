@@ -4,7 +4,7 @@ import React from "react";
 type TyperioInput = {
   text: string;
   style: string;
-  element: React.ElementType;
+  element: string;
 };
 
 type TyperioConfig = {
@@ -15,6 +15,12 @@ type TyperioProps = {
   input: TyperioInput[];
 };
 
-const Typerio: React.FC = () => <span>Typerioowowo</span>;
+const Typerio: React.FC<TyperioProps> = ({ input }) => {
+  const { text, style, element } = input[0];
+
+  const Element = React.createElement(element, { className: style }, text);
+
+  return Element;
+};
 
 export default Typerio;
