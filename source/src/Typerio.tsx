@@ -17,10 +17,15 @@ export type TyperioProps = {
 
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const isOdd = (number: number) => number % 2 !== 0;
+
+  const elements = input;
+
   return (
     <>
-      {input.map((item, index) => (
-        <item.element key={index}>{item.text}</item.element>
+      {elements.map((item, index) => (
+        <item.element key={index} className={item.style}>
+          {item.text}
+        </item.element>
       ))}
     </>
   );
