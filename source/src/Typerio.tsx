@@ -16,9 +16,13 @@ export type TyperioProps = {
 };
 
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
+  let elements: TyperioInput[] = [];
+
   const isOdd = (number: number) => number % 2 !== 0;
 
-  const elements = input;
+  const addElement = (inputObj: TyperioInput) => {
+    elements.push(inputObj);
+  };
 
   return (
     <>
