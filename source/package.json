@@ -32,10 +32,8 @@
     "@types/react": "^18.3.2",
     "typescript": "^5.4.5"
   },
-  "peerDependencies": {
-    "react": "^18.2.0"
-  },
   "dependencies": {
-    "react-usestateref": "^1.0.8"
+    "react-usestateref": "^1.0.8",
+    "react": "^18.2.0"
   }
 }
