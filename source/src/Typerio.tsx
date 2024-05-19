@@ -19,6 +19,7 @@ export type TyperioProps = {
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [elements, setElements, elementsRef] = useState<TyperioInput[]>([]);
   const [render, setRender, renderRef] = useState<number>(0);
+  const [timer, setTimer, timerRef] = useState<number>(0);
 
   const isOdd = (number: number) => number % 2 !== 0;
 
@@ -28,15 +29,18 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     setElements(newElements);
   };
 
-  const editElement = async (index: number, char: string) => {
-    const selectedElement = { ...elementsRef.current[index] };
+  const editElement = (objIndex: number, char: string) => {
+    /*const selectedElement = { ...elementsRef.current[index] };
     const newElements = [...elementsRef.current];
 
     selectedElement.text = `${selectedElement.text}${char}`;
 
     newElements[index] = selectedElement;
-    setElements(newElements);
-    return true;
+    setElements(newElements);*/
+    console.log(objIndex);
+    const selectedElement = { ...elementsRef.current[objIndex] };
+    console.log(char);
+    console.log(selectedElement);
   };
 
   useEffect(() => {
@@ -47,9 +51,11 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
         object.text = "";
         addElement(object);
         charArr.forEach((char, i) => {
+          const currentRender = renderRef.current;
           setTimeout(() => {
-            editElement(renderRef.current, char);
-          }, 1000 * i + 1000 * renderRef.current);
+            editElement(currentRender, char);
+          }, timerRef.current);
+          setTimer(timerRef.current + 500);
         });
         setRender(renderRef.current + 1);
       }
