@@ -46,12 +46,6 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
         const charArr = object.text.split("");
         object.text = "";
         addElement(object);
-
-        charArr.forEach((char, i) => {
-          setTimeout(() => {
-            editElement(elementsRef.current.length - 1, char);
-          }, 1000 * i);
-        });
       }
     }
   }, [elements]);
