@@ -29,8 +29,8 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   };
 
   const editElement = async (index: number, char: string) => {
-    const selectedElement = { ...elements[index] };
-    const newElements = [...elements];
+    const selectedElement = { ...elementsRef.current[index] };
+    const newElements = [...elementsRef.current];
 
     selectedElement.text = `${selectedElement.text}${char}`;
 
@@ -43,7 +43,15 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     if (input.length !== 0) {
       const object = input.shift();
       if (object) {
+        const charArr = object.text.split("");
+        object.text = "";
         addElement(object);
+
+        charArr.forEach((char, i) => {
+          setTimeout(() => {
+            editElement(elementsRef.current.length - 1, char);
+          }, 1000 * i);
+        });
       }
     }
   }, [elements]);
