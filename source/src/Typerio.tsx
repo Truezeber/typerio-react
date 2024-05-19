@@ -18,7 +18,7 @@ export type TyperioProps = {
 
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [elements, setElements, elementsRef] = useState<TyperioInput[]>([]);
-  const [render, setRender] = useState<string>("");
+  const [render, setRender, renderRef] = useState<number>(0);
 
   const isOdd = (number: number) => number % 2 !== 0;
 
@@ -46,6 +46,12 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
         const charArr = object.text.split("");
         object.text = "";
         addElement(object);
+        charArr.forEach((char, i) => {
+          setTimeout(() => {
+            editElement(renderRef.current, char);
+          }, 1000 * i + 1000 * renderRef.current);
+        });
+        setRender(renderRef.current + 1);
       }
     }
   }, [elements]);
