@@ -41,6 +41,14 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     const selectedElement = { ...elementsRef.current[objIndex] };
     console.log(char);
     console.log(selectedElement);
+    selectedElement.text = selectedElement.text + char;
+    //console.log(newText);
+
+    const newElements = [...elementsRef.current];
+    console.log(newElements);
+    newElements[objIndex] = selectedElement;
+    console.log(newElements);
+    setElements(newElements);
   };
 
   useEffect(() => {
