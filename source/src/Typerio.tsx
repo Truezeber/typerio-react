@@ -30,42 +30,36 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   };
 
   const editElement = (objIndex: number, char: string) => {
-    /*const selectedElement = { ...elementsRef.current[index] };
-    const newElements = [...elementsRef.current];
-
-    selectedElement.text = `${selectedElement.text}${char}`;
-
-    newElements[index] = selectedElement;
-    setElements(newElements);*/
-    console.log(objIndex);
     const selectedElement = { ...elementsRef.current[objIndex] };
-    console.log(char);
-    console.log(selectedElement);
-    selectedElement.text = selectedElement.text + char;
-    //console.log(newText);
-
     const newElements = [...elementsRef.current];
-    console.log(newElements);
+
+    selectedElement.text = selectedElement.text + char;
     newElements[objIndex] = selectedElement;
-    console.log(newElements);
+
     setElements(newElements);
+  };
+
+  const renderElement = (obj: TyperioInput) => {
+    const charArr = obj.text.split("");
+    obj.text = "";
+    addElement(obj);
+
+    charArr.forEach((char: string, i: any) => {
+      const currentRender = renderRef.current;
+      setTimeout(() => {
+        editElement(currentRender, char);
+      }, timerRef.current);
+      setTimer(timerRef.current + 500);
+    });
+
+    setRender(renderRef.current + 1);
   };
 
   useEffect(() => {
     if (input.length !== 0) {
       const object = input.shift();
       if (object) {
-        const charArr = object.text.split("");
-        object.text = "";
-        addElement(object);
-        charArr.forEach((char, i) => {
-          const currentRender = renderRef.current;
-          setTimeout(() => {
-            editElement(currentRender, char);
-          }, timerRef.current);
-          setTimer(timerRef.current + 500);
-        });
-        setRender(renderRef.current + 1);
+        renderElement(object);
       }
     }
   }, [elements]);
