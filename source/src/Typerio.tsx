@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import useState from "react-usestateref";
 
 export type TyperioInput = {
   text: string;
@@ -16,7 +17,8 @@ export type TyperioProps = {
 };
 
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
-  const [elements, setElements] = useState<TyperioInput[]>([]);
+  const [elements, setElements, elementsRef] = useState<TyperioInput[]>([]);
+  const [render, setRender] = useState<string>("");
 
   const isOdd = (number: number) => number % 2 !== 0;
 
@@ -26,7 +28,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     setElements(newElements);
   };
 
-  const editElement = (index: number, char: string) => {
+  const editElement = async (index: number, char: string) => {
     const selectedElement = { ...elements[index] };
     const newElements = [...elements];
 
@@ -34,6 +36,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     newElements[index] = selectedElement;
     setElements(newElements);
+    return true;
   };
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
   return (
     <>
-      {elements.map((item, index) => (
+      {elementsRef.current.map((item, index) => (
         <item.element key={index} className={item.style}>
           {item.text}
         </item.element>
