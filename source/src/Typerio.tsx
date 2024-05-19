@@ -36,7 +36,11 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     setElements(newElements);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    for (let i = 0; i < input.length; i++) {
+      console.log(input[i]);
+    }
+  }, []);
 
   return (
     <>
