@@ -9,11 +9,13 @@ export type TyperioInput = {
 };
 
 export type TyperioConfig = {
-  //Todo
+  frames: [string, string];
+  prefix: string;
+  speed: number;
 };
 
 export type TyperioProps = {
-  input: TyperioInput[];
+  input: [TyperioInput[], TyperioConfig];
 };
 
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
@@ -56,8 +58,8 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   };
 
   useEffect(() => {
-    if (input.length !== 0) {
-      const object = input.shift();
+    if (input[0].length !== 0) {
+      const object = input[0].shift();
       if (object) {
         renderElement(object);
       }
