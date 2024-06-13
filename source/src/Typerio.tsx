@@ -10,7 +10,6 @@ export type TyperioInput = {
 
 export type TyperioConfig = {
   frames: [string, string];
-  prefix: string;
   speed: number;
 };
 
