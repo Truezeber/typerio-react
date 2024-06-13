@@ -50,7 +50,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       setTimeout(() => {
         editElement(currentRender, char);
       }, timerRef.current);
-      setTimer(timerRef.current + 500);
+      setTimer(timerRef.current + input[1].speed);
     });
 
     setRender(renderRef.current + 1);
