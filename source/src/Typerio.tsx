@@ -21,6 +21,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [elements, setElements, elementsRef] = useState<TyperioInput[]>([]);
   const [render, setRender, renderRef] = useState<number>(0);
   const [timer, setTimer, timerRef] = useState<number>(0);
+  const [currentFrame, setFrame, frameRef] = useState<string>("");
 
   const isOdd = (number: number) => number % 2 !== 0;
 
@@ -30,7 +31,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     setElements(newElements);
   };
 
-  const editElement = (objIndex: number, char: string) => {
+  const editElement = (objIndex: number, char: string, frame: string) => {
     const selectedElement = { ...elementsRef.current[objIndex] };
     const newElements = [...elementsRef.current];
 
@@ -38,6 +39,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     newElements[objIndex] = selectedElement;
 
     setElements(newElements);
+    setFrame(frame);
   };
 
   const renderElement = (obj: TyperioInput) => {
@@ -47,8 +49,14 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     charArr.forEach((char: string, i: any) => {
       const currentRender = renderRef.current;
+      let renderFrame: string;
+      if (isOdd(i)) {
+        renderFrame = input[1].frames[0];
+      } else {
+        renderFrame = input[1].frames[1];
+      }
       setTimeout(() => {
-        editElement(currentRender, char);
+        editElement(currentRender, char, renderFrame);
       }, timerRef.current);
       setTimer(timerRef.current + input[1].speed);
     });
@@ -69,7 +77,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     <>
       {elementsRef.current.map((item, index) => (
         <item.element key={index} className={item.style}>
-          {item.text}
+          {item.text} {frameRef.current}
         </item.element>
       ))}
     </>
