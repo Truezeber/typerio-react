@@ -20,6 +20,7 @@ export type TyperioProps = {
 const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [elements, setElements, elementsRef] = useState<TyperioInput[]>([]);
   const [render, setRender, renderRef] = useState<number>(0);
+  const [renderingObj, setRenderingObj, renderingObjRef] = useState<number>(0);
   const [timer, setTimer, timerRef] = useState<number>(0);
   const [currentFrame, setFrame, frameRef] = useState<string>("");
 
@@ -57,6 +58,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       }
       setTimeout(() => {
         editElement(currentRender, char, renderFrame);
+        setRenderingObj(currentRender);
       }, timerRef.current);
       setTimer(timerRef.current + input[1].speed);
     });
@@ -75,15 +77,12 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
   return (
     <div>
-      <span style={{ display: "inline" }}>
-        {elementsRef.current.map((item, index) => (
-          <item.element key={index} className={item.style}>
-            {item.text}{" "}
-            {/*index !== elementsRef.current.length - 1 && frameRef.current*/}
-            <span style={{ display: "inline" }}>{frameRef.current}</span>
-          </item.element>
-        ))}
-      </span>
+      {elementsRef.current.map((item, index) => (
+        <item.element key={index} className={item.style}>
+          {item.text}
+          {index === renderingObjRef.current && <span>{frameRef.current}</span>}
+        </item.element>
+      ))}
     </div>
   );
 };
