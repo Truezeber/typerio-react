@@ -74,13 +74,17 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   }, [elements]);
 
   return (
-    <>
-      {elementsRef.current.map((item, index) => (
-        <item.element key={index} className={item.style}>
-          {item.text} {frameRef.current}
-        </item.element>
-      ))}
-    </>
+    <div>
+      <span style={{ display: "inline" }}>
+        {elementsRef.current.map((item, index) => (
+          <item.element key={index} className={item.style}>
+            {item.text}{" "}
+            {/*index !== elementsRef.current.length - 1 && frameRef.current*/}
+            <span style={{ display: "inline" }}>{frameRef.current}</span>
+          </item.element>
+        ))}
+      </span>
+    </div>
   );
 };
 
