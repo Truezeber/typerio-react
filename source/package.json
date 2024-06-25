@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pasiastazebra/typerio-react"
+    "url": "git+https://github.com/Truezeber/typerio-react"
   },
   "keywords": [
     "typewriting",
@@ -26,7 +26,7 @@
   "author": "Zeber",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pasiastazebra/typerio-react/issues"
+    "url": "https://github.com/Truezeber/typerio-react/issues"
   },
   "devDependencies": {
     "@types/react": "^18.3.2",
