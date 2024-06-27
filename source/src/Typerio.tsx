@@ -33,7 +33,12 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     setElements(newElements);
   };
 
-  const editElement = (objIndex: number, char: string, frame: string) => {
+  const editElement = (
+    objIndex: number,
+    char: string,
+    frame: string,
+    lastchar: boolean
+  ) => {
     const selectedElement = { ...elementsRef.current[objIndex] };
     const newElements = [...elementsRef.current];
 
@@ -42,6 +47,12 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     setElements(newElements);
     setFrame(frame);
+
+    if (lastchar === true) {
+      setShowFrame(false);
+    } else {
+      setShowFrame(true);
+    }
   };
 
   const renderElement = (obj: TyperioInput) => {
@@ -57,15 +68,18 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       } else {
         renderFrame = input[1].frames[1];
       }
-      setTimeout(() => {
-        editElement(currentRender, char, renderFrame);
-        setRenderingObj(currentRender);
-      }, timerRef.current);
-      setTimer(timerRef.current + input[1].speed);
-
       if (i === charArr.length - 1) {
-        setShowFrame(false);
+        setTimeout(() => {
+          editElement(currentRender, char, renderFrame, true);
+          setRenderingObj(currentRender);
+        }, timerRef.current);
+      } else {
+        setTimeout(() => {
+          editElement(currentRender, char, renderFrame, false);
+          setRenderingObj(currentRender);
+        }, timerRef.current);
       }
+      setTimer(timerRef.current + input[1].speed);
     });
 
     setRender(renderRef.current + 1);
