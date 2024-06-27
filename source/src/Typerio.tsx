@@ -23,6 +23,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [renderingObj, setRenderingObj, renderingObjRef] = useState<number>(0);
   const [timer, setTimer, timerRef] = useState<number>(0);
   const [currentFrame, setFrame, frameRef] = useState<string>("");
+  const [showFrame, setShowFrame, showFrameRef] = useState<boolean>(true);
 
   const isOdd = (number: number) => number % 2 !== 0;
 
@@ -41,6 +42,11 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     setElements(newElements);
     setFrame(frame);
+    setShowFrame(true);
+
+    setTimeout(() => {
+      setShowFrame(false);
+    }, input[1].speed);
   };
 
   const renderElement = (obj: TyperioInput) => {
@@ -80,7 +86,9 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       {elementsRef.current.map((item, index) => (
         <item.element key={index} className={item.style}>
           {item.text}
-          {index === renderingObjRef.current && <span>{frameRef.current}</span>}
+          {index === renderingObjRef.current && showFrameRef.current && (
+            <span>{frameRef.current}</span>
+          )}
         </item.element>
       ))}
     </>
