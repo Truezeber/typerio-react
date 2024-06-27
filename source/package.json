@@ -1,41 +1,41 @@
 {
-  "name": "typerio-react",
-  "version": "1.0.0",
-  "description": "React port of Typerio - lightweight  package for creating typewriter effect.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*",
-    "README.md",
-    "LICENSE.TXT"
-  ],
-  "scripts": {
-    "build": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Truezeber/typerio-react"
-  },
-  "keywords": [
-    "typewriting",
-    "typing",
-    "terminal",
-    "effect",
-    "word",
-    "sentences",
-    "words"
-  ],
-  "author": "Zeber",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Truezeber/typerio-react/issues"
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.2",
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "react-usestateref": "^1.0.8",
-    "react": "^18.2.0"
-  }
+	"name": "typerio-react",
+	"version": "1.0.1",
+	"description": "React port of Typerio - lightweight  package for creating typewriter effect.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist/**/*",
+		"README.md",
+		"LICENSE.TXT"
+	],
+	"scripts": {
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Truezeber/typerio-react"
+	},
+	"keywords": [
+		"typewriting",
+		"typing",
+		"terminal",
+		"effect",
+		"word",
+		"sentences",
+		"words"
+	],
+	"author": "Zeber",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Truezeber/typerio-react/issues"
+	},
+	"devDependencies": {
+		"@types/react": "^18.3.2",
+		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-usestateref": "^1.0.8"
+	}
 }
