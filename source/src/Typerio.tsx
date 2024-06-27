@@ -42,11 +42,6 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     setElements(newElements);
     setFrame(frame);
-    setShowFrame(true);
-
-    setTimeout(() => {
-      setShowFrame(false);
-    }, input[1].speed + 10);
   };
 
   const renderElement = (obj: TyperioInput) => {
@@ -67,6 +62,10 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
         setRenderingObj(currentRender);
       }, timerRef.current);
       setTimer(timerRef.current + input[1].speed);
+
+      if (i === charArr.length - 1) {
+        setShowFrame(false);
+      }
     });
 
     setRender(renderRef.current + 1);
