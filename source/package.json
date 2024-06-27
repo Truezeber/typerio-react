@@ -1,6 +1,6 @@
 {
 	"name": "typerio-react",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "React port of Typerio - lightweight  package for creating typewriter effect.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
