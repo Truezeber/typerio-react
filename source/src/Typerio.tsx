@@ -25,6 +25,9 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [currentFrame, setFrame, frameRef] = useState<string>("");
   const [showFrame, setShowFrame, showFrameRef] = useState<boolean>(true);
 
+  const totalChars = input[0].reduce((acc, obj) => acc + obj.text.length, 0);
+  let charCount = 0;
+
   const isOdd = (number: number) => number % 2 !== 0;
 
   const addElement = (inputObj: TyperioInput) => {
@@ -37,7 +40,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     objIndex: number,
     char: string,
     frame: string,
-    lastchar: boolean
+    isLastChar: boolean
   ) => {
     const selectedElement = { ...elementsRef.current[objIndex] };
     const newElements = [...elementsRef.current];
@@ -47,11 +50,12 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     setElements(newElements);
     setFrame(frame);
+    setShowFrame(!isLastChar);
 
-    if (lastchar === true) {
-      setShowFrame(false);
-    } else {
-      setShowFrame(true);
+    if (!isLastChar) {
+      setTimeout(() => {
+        setShowFrame(false);
+      }, input[1].speed);
     }
   };
 
@@ -60,7 +64,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     obj.text = "";
     addElement(obj);
 
-    charArr.forEach((char: string, i: any) => {
+    charArr.forEach((char: string, i: number) => {
       const currentRender = renderRef.current;
       let renderFrame: string;
       if (isOdd(i)) {
@@ -68,20 +72,16 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       } else {
         renderFrame = input[1].frames[1];
       }
-      if (i === charArr.length - 1) {
-        setTimeout(() => {
-          editElement(currentRender, char, renderFrame, true);
-          setRenderingObj(currentRender);
-        }, timerRef.current);
-      } else {
-        setTimeout(() => {
-          editElement(currentRender, char, renderFrame, false);
-          setRenderingObj(currentRender);
-        }, timerRef.current);
-      }
+      const isLastChar = charCount + i === totalChars - 1;
+
+      setTimeout(() => {
+        editElement(currentRender, char, renderFrame, isLastChar);
+        setRenderingObj(currentRender);
+      }, timerRef.current);
       setTimer(timerRef.current + input[1].speed);
     });
 
+    charCount += charArr.length;
     setRender(renderRef.current + 1);
   };
 
