@@ -23,10 +23,6 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
   const [renderingObj, setRenderingObj, renderingObjRef] = useState<number>(0);
   const [timer, setTimer, timerRef] = useState<number>(0);
   const [currentFrame, setFrame, frameRef] = useState<string>("");
-  const [showFrame, setShowFrame, showFrameRef] = useState<boolean>(true);
-
-  const totalChars = input[0].reduce((acc, obj) => acc + obj.text.length, 0);
-  let charCount = 0;
 
   const isOdd = (number: number) => number % 2 !== 0;
 
@@ -36,12 +32,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     setElements(newElements);
   };
 
-  const editElement = (
-    objIndex: number,
-    char: string,
-    frame: string,
-    isLastChar: boolean
-  ) => {
+  const editElement = (objIndex: number, char: string, frame: string) => {
     const selectedElement = { ...elementsRef.current[objIndex] };
     const newElements = [...elementsRef.current];
 
@@ -50,13 +41,6 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     setElements(newElements);
     setFrame(frame);
-    setShowFrame(!isLastChar);
-
-    if (!isLastChar) {
-      setTimeout(() => {
-        setShowFrame(false);
-      }, input[1].speed);
-    }
   };
 
   const renderElement = (obj: TyperioInput) => {
@@ -64,7 +48,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
     obj.text = "";
     addElement(obj);
 
-    charArr.forEach((char: string, i: number) => {
+    charArr.forEach((char: string, i: any) => {
       const currentRender = renderRef.current;
       let renderFrame: string;
       if (isOdd(i)) {
@@ -72,16 +56,13 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       } else {
         renderFrame = input[1].frames[1];
       }
-      const isLastChar = charCount + i === totalChars - 1;
-
       setTimeout(() => {
-        editElement(currentRender, char, renderFrame, isLastChar);
+        editElement(currentRender, char, renderFrame);
         setRenderingObj(currentRender);
       }, timerRef.current);
       setTimer(timerRef.current + input[1].speed);
     });
 
-    charCount += charArr.length;
     setRender(renderRef.current + 1);
   };
 
@@ -99,9 +80,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
       {elementsRef.current.map((item, index) => (
         <item.element key={index} className={item.style}>
           {item.text}
-          {index === renderingObjRef.current && showFrameRef.current && (
-            <span>{frameRef.current}</span>
-          )}
+          {index === renderingObjRef.current && <span>{frameRef.current}</span>}
         </item.element>
       ))}
     </>
