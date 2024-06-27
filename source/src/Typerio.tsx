@@ -46,7 +46,7 @@ const Typerio: React.FC<TyperioProps> = ({ input }) => {
 
     setTimeout(() => {
       setShowFrame(false);
-    }, input[1].speed);
+    }, input[1].speed + 10);
   };
 
   const renderElement = (obj: TyperioInput) => {
